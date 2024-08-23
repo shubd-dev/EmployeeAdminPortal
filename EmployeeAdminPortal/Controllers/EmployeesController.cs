@@ -42,6 +42,18 @@ namespace EmployeeAdminPortal.Controllers
             return Ok(employee);
         }
 
+        [HttpGet]
+        [Route("{Salary:decimal}")]
+        public IActionResult GetEmployeesWithSalary(decimal Salary) {
+            var employee = dbContext.Employees.Where(employee => employee.Salary >= Salary).ToList();
+            if (employee == null)
+            {
+                return NotFound();
+            }
+            return Ok(employee);
+        }
+
+
         [HttpPost]
         public IActionResult AddEmployee(AddEmployeeDto addEmployeeDto)
         {
